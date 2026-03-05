@@ -2,6 +2,7 @@ import streamlit as st
 from utils.data_loader import load_csv, get_column_types
 import matplotlib.pyplot as plt
 import seaborn as sns
+from utils.ai_insights import generate_basic_insights
 
 st.set_page_config(page_title="AI Data Analyst", layout="wide")
 
@@ -55,5 +56,10 @@ if uploaded_file is not None:
         else:
             st.write("Not enough numeric columns for correlation analysis.")
 
+        st.subheader("AI Generated Insights")
+        insights = generate_basic_insights(df)
+        for insight in insights:
+            st.write("•", insight)
+            
     except Exception as e:
         st.error(str(e))
